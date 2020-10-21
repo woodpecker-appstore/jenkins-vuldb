@@ -1,6 +1,7 @@
 package me.gv7.woodpecker.plugin;
 
 import me.gv7.woodpecker.plugin.exploits.JenkinsGroovyExecuteCVE_2018_1000861;
+import me.gv7.woodpecker.plugin.exploits.JenkinsGroovyExecuteEchoExploit;
 import me.gv7.woodpecker.plugin.exploits.JenkinsGroovyMemshellCVE_2018_1000861;
 import me.gv7.woodpecker.plugin.payloads.JenkinsGroovyPayloadsCVE_2018_1000861;
 import me.gv7.woodpecker.plugin.pocs.JenkinsGroovyPocCVE_2018_1000861;
@@ -22,7 +23,7 @@ public class JenkinsRCE implements IVulPlugin{
         callbacks.setVulPluginVersion("0.1.0");
         callbacks.setVulCVSS(9.0);
         callbacks.setVulName("Jenkins 反序列化");
-        callbacks.setVulId("CVE-2015-8103");
+        callbacks.setVulId("CVE-2018-1000861");
         callbacks.setVulSeverity(vulPluginCallbacks.VUL_CATEGORY_RCE);
         callbacks.setVulProduct("Jenkins");
         callbacks.setVulDescription("Jenkins<1.638");
@@ -30,6 +31,7 @@ public class JenkinsRCE implements IVulPlugin{
         List<IExploit> exploitList = new ArrayList<>();
         exploitList.add(new JenkinsGroovyExecuteCVE_2018_1000861());
         exploitList.add(new JenkinsGroovyMemshellCVE_2018_1000861());
+        exploitList.add(new JenkinsGroovyExecuteEchoExploit());
         callbacks.registerExploit(exploitList);
 
         List<IPayloadGenerator> payloadGenerators = new ArrayList<>();

