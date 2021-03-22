@@ -3,8 +3,9 @@ package me.gv7.woodpecker.plugin.pocs;
 import me.gv7.woodpecker.plugin.*;
 
 public class JenkinsGroovyPocCVE_2018_1000861 implements IPoc {
+
     @Override
-    public IScanResult doCheck(ITarget target, IResultOutput resultOutput) {
+    public IScanResult doVerify(ITarget target, IResultOutput resultOutput) throws Throwable {
         String address = target.getAddress();
         IScanResult result = JenkinsRCE.pluginHelper.createScanResult();
 
